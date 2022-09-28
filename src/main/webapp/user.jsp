@@ -46,6 +46,7 @@
                 <tr>
                     <th scope="col">Id</th>
                     <th scope="col">Username</th>
+                    <th scope="col">Roles</th>
                     <th scope="col">Actions</th>
                 </tr>
                 </thead>
@@ -58,9 +59,12 @@
                     </th>
                     <td><%= user.getUsername() %>
                     </td>
+                    <td><%= user.getRole() %>
+                    </td>
                     <form action="${pageContext.request.contextPath}/user" method="get">
                         <td>
                             <input type="hidden" name="id" value="<%=user.getId()%>">
+                            <input type="hidden" name="username" value="<%=user.getUsername()%>">
                             <input type="submit" name="action" value="modify">
                             <input type="submit" name="action" value="delete">
                         </td>

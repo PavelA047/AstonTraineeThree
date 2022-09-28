@@ -1,3 +1,5 @@
+<%@ page import="org.example.persist.UserRepository" %>
+<%@ page import="java.util.List" %>
 <!doctype html>
 <html lang="en">
 
@@ -36,13 +38,31 @@
     <div class="row py-2">
         <div class="col-12">
             <form action="${pageContext.request.contextPath}/user" method="post">
+                <% UserRepository userRepository = (UserRepository) application.getAttribute("userRepository");
+                    List<String> roles = userRepository.findAllRoles();
+                %>
                 <p>Input name
                     <label>
-                        <input type="text" name="username"/>
+                        <input type="text" name="username"
+                                <% if (request.getAttribute("username") != null) { %>
+                               value="<%= request.getAttribute("username")%>"/>
+                        <% } %>
                     </label></p>
                 <% if (request.getAttribute("id") != null) { %>
                 <p><input type="hidden" name="id" value="<%= request.getAttribute("id")%>"/></p>
                 <% } %>
+                <p>
+                    <select name="select" size="3" multiple="multiple" tabindex="1">
+                        <%
+                            for (String role : roles) {
+                        %>
+                        <option value="<%= role%>"><%= role%>
+                        </option>
+                        <%
+                            }
+                        %>
+                    </select>
+                </p>
                 <p><input type="submit" name="submit" value="submit"/></p>
             </form>
         </div>

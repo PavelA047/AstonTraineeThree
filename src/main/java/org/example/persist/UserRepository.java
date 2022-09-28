@@ -1,37 +1,17 @@
 package org.example.persist;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.atomic.AtomicLong;
 
-public class UserRepository {
+public interface UserRepository {
+    void insert(User user);
 
-    private final Map<Long, User> userMap = new ConcurrentHashMap<>();
+    List<User> findAll();
 
-    private final AtomicLong identity = new AtomicLong(0);
+    User findById(long id);
 
-    public List<User> findAll() {
-        return new ArrayList<>(userMap.values());
-    }
+    void update(User user);
 
-    public User findById(long id) {
-        return userMap.get(id);
-    }
+    void delete(long id);
 
-    public void insert(User user) {
-        long id = identity.getAndIncrement();
-        user.setId(id);
-        userMap.put(id, user);
-    }
-
-    public void update(User user) {
-        userMap.put(user.getId(), user);
-    }
-
-    public void delete(long id) {
-        userMap.remove(id);
-    }
-
+    List<String> findAllRoles();
 }
