@@ -12,7 +12,6 @@ import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
-//then
 @WebServlet(urlPatterns = "/user")
 public class UserServlet extends HttpServlet {
 
