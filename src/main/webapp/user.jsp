@@ -1,5 +1,5 @@
-<%@ page import="org.example.persist.User" %>
-<%@ page import="org.example.persist.UserRepository" %>
+<%@ page import="org.example.entities.User" %>
+<%@ page import="org.example.repositories.UserRepository" %>
 <!doctype html>
 <html lang="en">
 
@@ -45,8 +45,12 @@
                 <thead>
                 <tr>
                     <th scope="col">Id</th>
-                    <th scope="col">Username</th>
+                    <th scope="col">First name</th>
+                    <th scope="col">Last name</th>
+                    <th scope="col">Nickname</th>
+                    <th scope="col">Age</th>
                     <th scope="col">Roles</th>
+                    <th scope="col">Order</th>
                     <th scope="col">Actions</th>
                 </tr>
                 </thead>
@@ -57,14 +61,25 @@
                 <tr>
                     <th scope="row"><%= user.getId() %>
                     </th>
-                    <td><%= user.getUsername() %>
+                    <td><%= user.getFirstName() %>
                     </td>
-                    <td><%= user.getRole() %>
+                    <td><%= user.getLastName() %>
+                    </td>
+                    <td><%= user.getNickName() %>
+                    </td>
+                    <td><%= user.getAge() %>
+                    </td>
+                    <td><%= user.getRoles() %>
+                    </td>
+                    <td><%= user.getOrders() %>
                     </td>
                     <form action="${pageContext.request.contextPath}/user" method="get">
                         <td>
                             <input type="hidden" name="id" value="<%=user.getId()%>">
-                            <input type="hidden" name="username" value="<%=user.getUsername()%>">
+                            <input type="hidden" name="firstName" value="<%=user.getFirstName()%>">
+                            <input type="hidden" name="lastName" value="<%=user.getLastName()%>">
+                            <input type="hidden" name="nickname" value="<%=user.getNickName()%>">
+                            <input type="hidden" name="age" value="<%=user.getAge()%>">
                             <input type="submit" name="action" value="modify">
                             <input type="submit" name="action" value="delete">
                         </td>

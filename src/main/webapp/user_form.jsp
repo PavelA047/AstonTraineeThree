@@ -1,5 +1,7 @@
-<%@ page import="org.example.persist.UserRepository" %>
+<%@ page import="org.example.repositories.UserRepository" %>
+<%@ page import="org.example.repositories.RoleRepository" %>
 <%@ page import="java.util.List" %>
+<%@ page import="org.example.entities.Role" %>
 <!doctype html>
 <html lang="en">
 
@@ -38,14 +40,35 @@
     <div class="row py-2">
         <div class="col-12">
             <form action="${pageContext.request.contextPath}/user" method="post">
-                <% UserRepository userRepository = (UserRepository) application.getAttribute("userRepository");
-                    List<String> roles = userRepository.findAllRoles();
+                <% RoleRepository roleRepository = (RoleRepository) application.getAttribute("roleRepository");
+                    List<Role> roles = roleRepository.findAll();
                 %>
-                <p>Input name
+                <p>Input first name
                     <label>
-                        <input type="text" name="username"
-                                <% if (request.getAttribute("username") != null) { %>
-                               value="<%= request.getAttribute("username")%>"/>
+                        <input type="text" name="firstName"
+                                <% if (request.getAttribute("firstName") != null) { %>
+                               value="<%= request.getAttribute("firstName")%>"/>
+                        <% } %>
+                    </label></p>
+                <p>Input last name
+                    <label>
+                        <input type="text" name="lastName"
+                                <% if (request.getAttribute("lastName") != null) { %>
+                               value="<%= request.getAttribute("lastName")%>"/>
+                        <% } %>
+                    </label></p>
+                <p>Input nickname
+                    <label>
+                        <input type="text" name="nickname"
+                                <% if (request.getAttribute("nickname") != null) { %>
+                               value="<%= request.getAttribute("nickname")%>"/>
+                        <% } %>
+                    </label></p>
+                <p>Input age
+                    <label>
+                        <input type="text" name="age"
+                                <% if (request.getAttribute("age") != null) { %>
+                               value="<%= request.getAttribute("age")%>"/>
                         <% } %>
                     </label></p>
                 <% if (request.getAttribute("id") != null) { %>
@@ -54,9 +77,9 @@
                 <p>
                     <select name="select" size="3" multiple="multiple" tabindex="1">
                         <%
-                            for (String role : roles) {
+                            for (Role role : roles) {
                         %>
-                        <option value="<%= role%>"><%= role%>
+                        <option value="<%= role.getId()%>"><%= role.getRoleName()%>
                         </option>
                         <%
                             }
