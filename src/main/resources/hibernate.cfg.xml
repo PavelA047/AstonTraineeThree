@@ -1,0 +1,35 @@
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="connection.driver_class">org.postgresql.Driver</property>
+        <property name="connection.url">jdbc:postgresql://localhost:5432/usersHiber</property>
+        <property name="connection.username">user</property>
+        <property name="connection.password">pass</property>
+        <property name="connection.pool_size">1</property>
+        <property name="current_session_context_class">thread</property>
+
+        <property name="hibernate.hbm2ddl.auto">update</property>
+
+        <property name="hibernate.show_sql">true</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+        <property name="hibernate.format_sql">true</property>
+
+        <property name="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory
+        </property>
+
+        <!--         enable second level cache and query cache -->
+        <property name="hibernate.cache.use_second_level_cache">true</property>
+        <property name="hibernate.cache.use_query_cache">true</property>
+        <property name="net.sf.ehcache.configurationResourceName">ehcache.xml</property>
+
+        <mapping class="org.example.entities.User"/>
+        <mapping class="org.example.entities.KindUser"/>
+        <mapping class="org.example.entities.UsualUser"/>
+        <mapping class="org.example.entities.AngryUser"/>
+        <mapping class="org.example.entities.Role"/>
+        <mapping class="org.example.entities.Product"/>
+        <mapping class="org.example.entities.Order"/>
+    </session-factory>
+</hibernate-configuration>
